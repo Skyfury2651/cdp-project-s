@@ -2,18 +2,12 @@
 
 namespace App\Jobs;
 
-use App\Enums\LakeJobStatus;
-use App\Imports\LakeCollectionImport;
-use App\Models\LakeJob;
 use App\Services\LakeJobService;
-use App\Services\LakeService;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Log;
 
 class ValidateLakeData implements ShouldQueue
 {

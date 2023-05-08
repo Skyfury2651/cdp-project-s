@@ -5,6 +5,7 @@ namespace App\Imports;
 use App\Models\LakeJob;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\SkipsErrors;
@@ -78,10 +79,10 @@ class LakeCollectionImport implements ToCollection, WithChunkReading, WithValida
 
         foreach ($rows as $row) {
             ++$this->importedRows;
-            $transformRow = $row->mapWithKeys(function($item, $key) {
+            $transformRow = $row->mapWithKeys(function ($item, $key) {
                 $newKey = $this->fieldMaps[$key] ?? $key;
                 return [$newKey => $item];
-            })->filter(function($value, $key) {
+            })->filter(function ($value, $key) {
                 return in_array($key, array_keys($this->attributeRules));
             });;
 
@@ -130,15 +131,19 @@ class LakeCollectionImport implements ToCollection, WithChunkReading, WithValida
         return strtolower($str);
     }
 
-    private function handleFields ()
+    private function handleFields()
     {
         $fieldMaps = collect([]);
         $this->fieldRules = collect($this->customFields)->mapWithKeys(function ($item) use ($fieldMaps) {
             $header = $this->vnToStr($item['header']);
-            $key =  '*.' . $header;
+            $key = '*.' . $header;
 
             $fieldMaps[$header] = $item['name'];
-            return [$key => $this->attributeRules[$item['name']]];
+            $validateConditions = collect($this->attributeRules[$item['name']])->map(function($item) {
+                return $item == 'required' ? 'nullable' : $item;
+            });
+
+            return [$key => $validateConditions];
         })->toArray();
 
         $this->fieldMaps = $fieldMaps;
