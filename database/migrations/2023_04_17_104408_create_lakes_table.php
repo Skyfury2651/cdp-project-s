@@ -15,38 +15,39 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('lake_job_id');
 
-            $table->string('status_bill');//Trạng thái
-            $table->string('id_bill');//Mã phiếu
-            $table->string('id_bill_taken');//Mã phiếu đặt
-            $table->dateTime('bill_order_time');//Ngày đặt
-            $table->dateTime('bill_delivery_time');//Ngày giao
-            $table->string('bill_group');//Nhóm hoá đơn theo vùng
-            $table->string('carer_code');//Mã nhân viên phụ trách
-            $table->string('order_name');//Tên nhân viên đặt
-            $table->string('line_code');//Mã tuyến
-            $table->dateTime('sold_time');//Ngày bán
-            $table->string('seller_name');//Tên người bán
-            $table->string('customer_code');//Mã khách hàng
-            $table->string('customer_name');//Tên khách hàng
-            $table->string('customer_group');//Nhóm khách hàng - table
-            $table->string('customer_type');//Loại khách hàng
-            $table->text('customer_address');//Địa chỉ
-            $table->string('customer_phone');//SĐT
-            $table->text('customer_description');//Diễn giải
-            $table->string('warehouse_code');//Mã kho
-            $table->string('product_code');//Mã sản phẩm - table
-            $table->string('product_name');//Tên sản phẩm
-            $table->string('unit');//Đơn vị tính
-            $table->integer('quantity');//Số lượng
-            $table->double('price');//Đơn giá
-            $table->double('amount');//Thành tiền
-            $table->double('vat_percent');//VAT
-            $table->double('vat_number');//Tiền thuế
-            $table->double('rebate');//Chiết khấu
-            $table->double('bill_total');//Thành tiền tổng
-            $table->text('tax_code');//Mã số thuế
-            $table->text('channel');//Kênh
-            $table->text('data_source');
+            // TODO:: check nullable possible
+            $table->string('status_bill')->nullable();//Trạng thái
+            $table->string('id_bill')->nullable();//Mã phiếu
+            $table->string('id_bill_taken')->nullable();//Mã phiếu đặt
+            $table->dateTime('bill_order_time')->nullable();//Ngày đặt
+            $table->dateTime('bill_delivery_time')->nullable();//Ngày giao
+            $table->string('bill_group')->nullable();//Nhóm hoá đơn theo vùng
+            $table->string('carer_code')->nullable();//Mã nhân viên phụ trách
+            $table->string('order_name')->nullable();//Tên nhân viên đặt
+            $table->string('line_code')->nullable();//Mã tuyến
+            $table->dateTime('sold_time')->nullable();//Ngày bán
+            $table->string('seller_name')->nullable();//Tên người bán
+            $table->string('customer_code')->nullable();//Mã khách hàng
+            $table->string('customer_name')->nullable();//Tên khách hàng
+            $table->string('customer_group')->nullable();//Nhóm khách hàng - table
+            $table->string('customer_type')->nullable();//Loại khách hàng
+            $table->text('customer_address')->nullable();//Địa chỉ
+            $table->string('customer_phone')->nullable();//SĐT
+            $table->text('customer_description')->nullable();//Diễn giải
+            $table->string('warehouse_code')->nullable();//Mã kho
+            $table->string('product_code')->nullable();//Mã sản phẩm - table
+            $table->string('product_name')->nullable();//Tên sản phẩm
+            $table->string('unit')->nullable();//Đơn vị tính
+            $table->integer('quantity')->nullable();//Số lượng
+            $table->double('price')->nullable();//Đơn giá
+            $table->double('amount')->nullable();//Thành tiền
+            $table->double('vat_percent')->nullable();//VAT
+            $table->double('vat_number')->nullable();//Tiền thuế
+            $table->double('rebate')->nullable();//Chiết khấu
+            $table->double('bill_total')->nullable();//Thành tiền tổng
+            $table->text('tax_code')->nullable();//Mã số thuế
+            $table->text('channel')->nullable();//Kênh
+            $table->text('data_source')->nullable();
             $table->text('special_note')->nullable();//có các thay đổi đặc biệt
             $table->timestamps();
 
