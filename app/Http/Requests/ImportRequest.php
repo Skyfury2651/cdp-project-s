@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Lake;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class ImportRequest extends FormRequest
 {
@@ -22,10 +24,10 @@ class ImportRequest extends FormRequest
     public function rules(): array
     {
         return [
-            // TODO: them validate file excel only
-            'file' => ['required'],
-            // TODO: validate 3x fields only
-            'fields' => ['required']
+            'file' => ['required', 'file', 'mimes:xlsx'],
+            'fields' => ['required'],
+            'fields.*.name' => ['required', Rule::in(app(Lake::class)->getFillable())],
+            'fields.*.header' => ['required', 'string']
         ];
     }
 }
