@@ -40,7 +40,7 @@
 
                 <div class="mt-16">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-                        <a href="https://laravel.com/docs" class="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500">
+                        <div href="#" class="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500">
                             <div>
                                 <div class="h-16 w-16 bg-red-50 dark:bg-red-800/20 flex items-center justify-center rounded-full">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="w-7 h-7 stroke-red-500">
@@ -48,7 +48,41 @@
                                     </svg>
                                 </div>
 
-                                <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Documentation</h2>
+                                <div id="upload-container">
+                                    <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Documentation</h2>
+                                    <input id="file-upload" type="file" name="file-upload">
+                                </div>
+
+                                <form action="{{ route('file-upload') }}"
+                                      class="dropzone"
+                                      id="my-awesome-dropzone">
+                                      @csrf
+                                    <button>Submit</button>
+                                    <input type="file" name="file"  style="display: none;">
+                                </form>
+
+                                <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+                                <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+                                <script>
+                                    {{--let myDropzone = new Dropzone("div#upload-container", { url: "{{route('file-upload')}}"});--}}
+
+                                    // A quick way setup
+                                    var myDropzone = new Dropzone("div#upload-container", {
+                                        url: "{{route('file-upload')}}",
+                                        // Setup chunking
+                                        chunking: true,
+                                        method: "POST",
+                                        maxFilesize: 400000000,
+                                        chunkSize: 1000000,
+                                        // If true, the individual chunks of a file are being uploaded simultaneously.
+                                        parallelChunkUploads: true
+                                    });
+
+                                    // Append token to the request - required for web routes
+                                    myDropzone.on('sending', function (file, xhr, formData) {
+                                        formData.append("_token", token);
+                                    })
+                                </script>
 
                                 <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
                                     Laravel has wonderful documentation covering every aspect of the framework. Whether you are a newcomer or have prior experience with Laravel, we recommend reading our documentation from beginning to end.
@@ -58,7 +92,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="self-center shrink-0 stroke-red-500 w-6 h-6 mx-6">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
                             </svg>
-                        </a>
+                        </div>
 
                         <a href="https://laracasts.com" class="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500">
                             <div>

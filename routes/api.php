@@ -21,3 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/import-data', [ImportController::class, 'import']);
 Route::post('/process-data/{lakeJob}', [ImportController::class, 'process']);
+
+Route::post('upload-advanced', [\App\Http\Controllers\UploaderController::class, 'uploadFile'])->name('file-upload');
